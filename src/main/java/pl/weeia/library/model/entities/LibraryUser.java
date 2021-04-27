@@ -3,6 +3,8 @@ package pl.weeia.library.model.entities;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -31,6 +33,7 @@ public class LibraryUser {
     private LocalDateTime registration;
     private String refreshToken;
 
+    @Fetch(FetchMode.JOIN)
     @OneToMany(mappedBy = "bookCopy")
     private Set<Borrowing> borrowings;
 
