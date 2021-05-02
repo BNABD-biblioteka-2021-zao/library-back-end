@@ -7,13 +7,16 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.weeia.library.model.entities.Book;
+import pl.weeia.library.model.entities.BookCopy;
 import pl.weeia.library.model.entities.LibraryUser;
+import pl.weeia.library.repositories.BookCopyRepository;
 import pl.weeia.library.repositories.BookRepository;
 import pl.weeia.library.repositories.BorrowingRepository;
 import pl.weeia.library.repositories.LibraryUserRepository;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -22,14 +25,23 @@ public class SampleDataProvider implements ApplicationRunner {
     private final PasswordEncoder passwordEncoder;
     private final LibraryUserRepository userRepo;
     private final BookRepository bookRepo;
+    private final BookCopyRepository copyRepository;
     private final BorrowingRepository borrowingRepo;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         userRepo.saveAll(Arrays.asList(
-                new LibraryUser("test", passwordEncoder.encode("pass"), "email@email.email", "USER"),
-                new LibraryUser("test2", passwordEncoder.encode("pass"), "email2@email.email", "LIBRARIAN")
+                new LibraryUser("test", passwordEncoder.encode("password"), "email@email.email", "ROLE_USER"),
+                new LibraryUser("librarian", passwordEncoder.encode("password"), "librarian@email.lib", "ROLE_LIBRARIAN")
         ));
+        List<Book> books = bookRepo.saveAll(Arrays.asList(
+           new Book("Pan Tadeusz", "Epopeja", "Adam Mickiewicz", "Some desc"),
+           new Book("Zemsta", "Komedia", "Aleksander Fredro", "wać Panie")
+        ));
+        copyRepository.saveAll(Arrays.asList(
+           new BookCopy("7894161", LocalDate.now(), 255L, "KEN", books.get(0))
+        ));
+
         ObjectMapper mapper = new ObjectMapper();
 
 //        System.out.println(mapper.writeValueAsString(new LibraryUser("test2", passwordEncoder.encode("pass"), "email2@email.email", "LIBRARIAN")));

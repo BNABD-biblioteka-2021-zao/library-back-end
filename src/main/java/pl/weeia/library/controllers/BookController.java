@@ -20,7 +20,12 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public Book insertNewBook(@RequestBody Book book) {
-        return bookService.insertNewBook(book);
+    public Book insertBook(@RequestBody Book book) {
+        return bookService.insertBook(book);
+    }
+
+    @PutMapping("/update")
+    public Book updateBook(@RequestBody Book book) {
+        return  bookService.updateBook(book);
     }
 }

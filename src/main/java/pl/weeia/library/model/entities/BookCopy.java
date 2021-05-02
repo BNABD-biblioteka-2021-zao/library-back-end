@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -23,7 +20,19 @@ public class BookCopy {
     private LocalDate publishDate;
     private Long pageAmount;
     private String publisher;
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
 
     @OneToMany(mappedBy = "user")
     private Set<Borrowing> borrowings;
+
+    public BookCopy( String ISBN, LocalDate publishDate, Long pageAmount, String publisher, Book book) {
+        this.ISBN = ISBN;
+        this.publishDate = publishDate;
+        this.pageAmount = pageAmount;
+        this.publisher = publisher;
+        this.book = book;
+    }
+
 }

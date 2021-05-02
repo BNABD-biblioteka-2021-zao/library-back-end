@@ -1,7 +1,9 @@
 package pl.weeia.library.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import pl.weeia.library.model.entities.Book;
 import pl.weeia.library.repositories.BookRepository;
 
@@ -19,7 +21,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book insertNewBook(Book book) {
+    public Book insertBook(Book book) {
         return bookRepository.save(book);
+    }
+
+    public Book updateBook(Book book) {
+        if (bookRepository.existsById(book.getId())) {
+            return bookRepository.save(book);
+        }else {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Book with provided id doesn't exist");
+        }
     }
 }

@@ -7,6 +7,6 @@ import java.util.List;
 public interface BookService {
     
     List<Book> findAllBooks();
-
-    Book insertNewBook(Book book);
+    Book insertBook(Book book);
+    Book updateBook(Book book);
 }
