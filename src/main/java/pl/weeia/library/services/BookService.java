@@ -9,4 +9,6 @@ public interface BookService {
     List<Book> findAllBooks();
     Book insertBook(Book book);
     Book updateBook(Book book);
+
+    void deleteById(Long id);
 }

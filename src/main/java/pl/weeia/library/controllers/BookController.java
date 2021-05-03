@@ -1,6 +1,8 @@
 package pl.weeia.library.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.weeia.library.model.entities.Book;
 import pl.weeia.library.services.BookService;
@@ -15,17 +17,23 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/all")
-    public List<Book> findAllBooks() {
-        return bookService.findAllBooks();
+    public ResponseEntity<List<Book>> findAllBooks() {
+        return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public Book insertBook(@RequestBody Book book) {
-        return bookService.insertBook(book);
+    @PostMapping
+    public ResponseEntity<Book> insertBook(@RequestBody Book book) {
+        return new ResponseEntity<>(bookService.insertBook(book), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
-    public Book updateBook(@RequestBody Book book) {
-        return  bookService.updateBook(book);
+    @PutMapping
+    public ResponseEntity<Book> updateBook(@RequestBody Book book) {
+        return new ResponseEntity<>(bookService.updateBook(book), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable("id")Long id) {
+        bookService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -8,4 +8,8 @@ public interface BookCopyService {
     BookCopy insertBookCopy(BookCopy bookCopy);
 
     List<BookCopy> findAll();
+
+    BookCopy updateBook(BookCopy bookCopy);
+
+    void deleteById(Long id);
 }

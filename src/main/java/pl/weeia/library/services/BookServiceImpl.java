@@ -25,11 +25,17 @@ public class BookServiceImpl implements BookService {
         return bookRepository.save(book);
     }
 
+    @Override
     public Book updateBook(Book book) {
         if (bookRepository.existsById(book.getId())) {
             return bookRepository.save(book);
-        }else {
+        } else {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Book with provided id doesn't exist");
         }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        bookRepository.deleteById(id);
     }
 }

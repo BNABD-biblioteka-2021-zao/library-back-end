@@ -29,7 +29,7 @@ public class LibraryUserServiceImpl implements LibraryUserService{
         userRepository.flush();
     }
 
-    public Long saveUser(LibraryUser user) throws Exception {
+    public Long saveUser(LibraryUser user) {
         if (user.getPassword().length() < 8){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password to short");
         }
@@ -38,5 +38,14 @@ public class LibraryUserServiceImpl implements LibraryUserService{
         user.setRole("USER");
         LibraryUser libraryUser = userRepository.save(user);
         return libraryUser.getId();
+    }
+
+    @Override
+    public String deleteMyAccount(String name) {
+        if (userRepository.deleteByEmail(name) != 0){
+            return "User deleted";
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User was not deleted");
+        }
     }
 }

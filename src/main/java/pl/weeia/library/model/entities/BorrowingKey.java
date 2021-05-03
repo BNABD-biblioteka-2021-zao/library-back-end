@@ -1,5 +1,6 @@
 package pl.weeia.library.model.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Embeddable
 @Data
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class BorrowingKey implements Serializable {
 
     @Column(name = "user_id")
