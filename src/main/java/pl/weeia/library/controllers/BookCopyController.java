@@ -9,6 +9,7 @@ import pl.weeia.library.services.BookCopyService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/bookcopy")

@@ -17,6 +17,7 @@ import pl.weeia.library.security.JwtUtil;
 import pl.weeia.library.security.LibraryUserDetailService;
 import pl.weeia.library.services.LibraryUserService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/auth")
