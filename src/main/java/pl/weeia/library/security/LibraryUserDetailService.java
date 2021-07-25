@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import pl.weeia.library.model.entities.LibraryUser;
 import pl.weeia.library.repositories.LibraryUserRepository;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 @Service
