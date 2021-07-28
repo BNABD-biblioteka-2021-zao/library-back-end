@@ -9,10 +9,9 @@ import pl.weeia.library.services.BookService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
-@RestController
 @RequestMapping("/api/v1/book")
+@RestController
 public class BookController {
 
     private final BookService bookService;
