@@ -1,6 +1,7 @@
 package pl.weeia.library.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,10 +18,9 @@ import pl.weeia.library.security.JwtUtil;
 import pl.weeia.library.security.LibraryUserDetailService;
 import pl.weeia.library.services.LibraryUserService;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
-@RestController
 @RequestMapping("/api/v1/auth")
+@RestController
 public class AuthController {
 
     private final PasswordEncoder passwordEncoder;

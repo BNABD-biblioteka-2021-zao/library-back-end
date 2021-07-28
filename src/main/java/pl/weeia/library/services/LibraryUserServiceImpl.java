@@ -35,7 +35,7 @@ public class LibraryUserServiceImpl implements LibraryUserService{
         }
         String password = user.getPassword();
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole("USER");
+        user.setRole("ROLE_USER");
         LibraryUser libraryUser = userRepository.save(user);
         return libraryUser.getId();
     }
