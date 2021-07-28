@@ -24,8 +24,9 @@ public class LibraryUserServiceImpl implements LibraryUserService{
     }
 
     @Transactional
-    public void saveRefreshToken(String email, UUID refreshToken) {
-        userRepository.updateUserByEmail(email, refreshToken.toString());
+    public void saveRefreshToken(String email, String refreshToken) {
+        System.out.println("saving token");
+        userRepository.updateUserByEmail(email, refreshToken);
         userRepository.flush();
     }
 

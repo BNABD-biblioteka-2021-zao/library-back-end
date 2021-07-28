@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public interface LibraryUserService {
 
-    void saveRefreshToken(String email, UUID refreshToken);
+    void saveRefreshToken(String email, String refreshToken);
     Long saveUser(LibraryUser user) throws Exception;
 
     LibraryUser getUserByEmail(String name);

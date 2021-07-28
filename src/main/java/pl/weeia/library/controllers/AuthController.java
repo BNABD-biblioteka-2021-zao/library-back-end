@@ -48,7 +48,7 @@ public class AuthController {
         final UserDetails userDetails = userDetailService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         final String refreshToken = jwtTokenUtil.generateRefreshToken();
-        userService.saveRefreshToken(userDetails.getUsername(), jwtTokenUtil.extractId(refreshToken));
+        userService.saveRefreshToken(userDetails.getUsername(), refreshToken);
         return ResponseEntity.ok(new AuthenticationResponse(jwt,60 * 60L, refreshToken));
     }
 
@@ -60,7 +60,7 @@ public class AuthController {
             final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             final String jwt = jwtTokenUtil.generateToken(userDetails);
             final String refreshToken = jwtTokenUtil.generateRefreshToken();
-            userService.saveRefreshToken(userDetails.getUsername(), jwtTokenUtil.extractId(refreshToken));
+            userService.saveRefreshToken(userDetails.getUsername(), refreshToken);
             return ResponseEntity.ok(new AuthenticationResponse(jwt,60 * 60L, refreshToken));
         } else {
             throw new Exception("Incorrect refresh token");
