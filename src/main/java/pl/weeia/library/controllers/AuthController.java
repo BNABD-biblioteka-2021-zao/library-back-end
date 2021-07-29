@@ -53,10 +53,11 @@ public class AuthController {
     }
 
     @PostMapping("/refresh-token")
-    public ResponseEntity<?> refreshToken(Authentication authentication, @RequestBody RefreshTokenRequest token) throws Exception {
+    public ResponseEntity<?> refreshToken(Authentication authentication, @RequestBody RefreshTokenRequest tokenBody) throws Exception {
         LibraryUser user= userService.getUserByEmail(authentication.getName());
-        String tokenId = jwtTokenUtil.extractId(token.getRefreshToken()).toString();
-        if (tokenId.equals(user.getRefreshToken())){
+//        String tokenId = jwtTokenUtil.extractId(token.getRefreshToken()).toString();
+        System.out.println(user.getRefreshToken());
+        if (tokenBody.getRefreshToken().equals(user.getRefreshToken())){
             final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             final String jwt = jwtTokenUtil.generateToken(userDetails);
             final String refreshToken = jwtTokenUtil.generateRefreshToken();

@@ -13,7 +13,7 @@ public interface LibraryUserRepository extends JpaRepository<LibraryUser, Long> 
     LibraryUser findByEmail(String email);
 
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE LibraryUser u SET u.refreshToken = ?2, u.name = 'kappa' WHERE u.email = ?1")
+    @Query("UPDATE LibraryUser u SET u.refreshToken = ?2 WHERE u.email = ?1")
     Integer updateUserByEmail(String email, String UUID);
 
     Integer deleteByEmail(String name);
