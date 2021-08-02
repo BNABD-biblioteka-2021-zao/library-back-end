@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import pl.weeia.library.model.DTOs.UserInsertModel;
 import pl.weeia.library.model.entities.LibraryUser;
 import pl.weeia.library.repositories.LibraryUserRepository;
 
@@ -30,14 +31,17 @@ public class LibraryUserServiceImpl implements LibraryUserService{
         userRepository.flush();
     }
 
-    public Long saveUser(LibraryUser user) {
+    public Long saveUser(UserInsertModel user) {
         if (user.getPassword().length() < 8){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password to short");
         }
+        LibraryUser libraryUser = new LibraryUser();
         String password = user.getPassword();
-        user.setPassword(passwordEncoder.encode(password));
-        user.setRole("ROLE_USER");
-        LibraryUser libraryUser = userRepository.save(user);
+        libraryUser.setPassword(passwordEncoder.encode(password));
+        libraryUser.setEmail(user.getEmail());
+        libraryUser.setName(user.getName());
+        libraryUser.setRole("ROLE_USER");
+        libraryUser = userRepository.save(libraryUser);
         return libraryUser.getId();
     }
 

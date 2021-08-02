@@ -1,21 +1,19 @@
 package pl.weeia.library.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.DynamicUpdate;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@DynamicUpdate
-@Data
-@RequiredArgsConstructor
+@Setter
+@Getter
+@NoArgsConstructor
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
     private Long id;
     @NotNull
     private String title;

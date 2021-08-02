@@ -1,21 +1,22 @@
 package pl.weeia.library.model.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookCopy {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "copy_seq")
     private Long id;
+
     private String ISBN;
     private LocalDate publishDate;
     private Long pageAmount;
@@ -24,7 +25,8 @@ public class BookCopy {
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Borrowing> borrowings;
 
     public BookCopy( String ISBN, LocalDate publishDate, Long pageAmount, String publisher, Book book) {
@@ -35,4 +37,11 @@ public class BookCopy {
         this.book = book;
     }
 
+    public BookCopy(Long bookCopyId) {
+        this.id = bookCopyId;
+    }
+
+    public BookCopy(long i) {
+        this.id = i;
+    }
 }

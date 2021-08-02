@@ -28,7 +28,10 @@ public class BorrowingController {
     }
 
     @PostMapping
-    public ResponseEntity<Borrowing> insertBorrowing(@RequestBody Borrowing borrowing) {
+    public ResponseEntity<Borrowing> insertBorrowing(Principal principal, @RequestBody Borrowing borrowing) {
+        System.out.println(borrowing);
+        System.out.println(principal);
+        System.out.println("***********************************************");
         return new ResponseEntity<>(borrowingService.insertBorrowing(borrowing), HttpStatus.CREATED);
     }
 
@@ -37,9 +40,9 @@ public class BorrowingController {
         return new ResponseEntity<>(borrowingService.updateBorrowing(borrowing), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{bookid}/{userid}")
-    public ResponseEntity<?> deleteBorrowing(@PathVariable("bookid")Long bookid, @PathVariable("userid")Long userid) {
-        borrowingService.deleteByIds(bookid,userid);
+    @DeleteMapping("/{borrowingId}")
+    public ResponseEntity<?> deleteBorrowing(@PathVariable("borrowingId")Long borrowingId) {
+        borrowingService.deleteById(borrowingId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

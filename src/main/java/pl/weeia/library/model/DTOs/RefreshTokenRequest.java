@@ -1,4 +1,4 @@
-package pl.weeia.library.model;
+package pl.weeia.library.model.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

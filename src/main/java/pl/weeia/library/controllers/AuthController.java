@@ -9,9 +9,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import pl.weeia.library.model.AuthenticationRequest;
-import pl.weeia.library.model.AuthenticationResponse;
-import pl.weeia.library.model.RefreshTokenRequest;
+import pl.weeia.library.model.DTOs.AuthenticationRequest;
+import pl.weeia.library.model.DTOs.AuthenticationResponse;
+import pl.weeia.library.model.DTOs.RefreshTokenRequest;
+import pl.weeia.library.model.DTOs.UserInsertModel;
 import pl.weeia.library.model.entities.LibraryUser;
 import pl.weeia.library.security.JwtUtil;
 import pl.weeia.library.security.LibraryUserDetailService;
@@ -29,7 +30,7 @@ public class AuthController {
     private final LibraryUserService userService;
 
     @PostMapping("/register")
-    public Long registerLibraryUser(@RequestBody LibraryUser user) throws Exception {
+    public Long registerLibraryUser(@RequestBody UserInsertModel user) throws Exception {
         return userService.saveUser(user);
     }
 

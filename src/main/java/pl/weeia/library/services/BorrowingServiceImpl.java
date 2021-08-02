@@ -2,12 +2,19 @@ package pl.weeia.library.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import pl.weeia.library.model.entities.BookCopy;
 import pl.weeia.library.model.entities.Borrowing;
-import pl.weeia.library.model.entities.BorrowingKey;
+import pl.weeia.library.model.entities.LibraryUser;
+import pl.weeia.library.model.enums.Status;
+import pl.weeia.library.repositories.BookCopyRepository;
 import pl.weeia.library.repositories.BorrowingRepository;
+import pl.weeia.library.repositories.LibraryUserRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,6 +22,8 @@ import java.util.List;
 public class BorrowingServiceImpl implements BorrowingService {
 
     private final BorrowingRepository borrowingRepository;
+    private final BookCopyRepository copyRepository;
+    private final LibraryUserRepository userRepository;
 
     @Override
     public List<Borrowing> findAllBorrowings() {
@@ -23,6 +32,27 @@ public class BorrowingServiceImpl implements BorrowingService {
 
     @Override
     public Borrowing insertBorrowing(Borrowing borrowing) {
+        System.out.println(borrowing);
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getAuthorities());
+        boolean hasUserRole = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLE_USER"));
+        BookCopy copy = copyRepository.findById(borrowing.getBookCopy().getId()).orElseThrow();
+        LibraryUser user = userRepository.findById(borrowing.getUser().getId()).orElseThrow();
+        System.out.println(user);
+        System.out.println(copy);
+        borrowing.setUser(user);
+        borrowing.setBookCopy(copy);
+        if (hasUserRole) {
+            borrowing.setStatus(Status.reservation);
+            borrowing.setBorrowStartTime(null);
+            borrowing.setBorrowEndTime(null);
+        }else {
+            borrowing.setStatus(Status.borrowed);
+            if (borrowing.getBorrowStartTime() == null){
+                borrowing.setBorrowStartTime(LocalDateTime.now());
+            }
+        }
         return borrowingRepository.save(borrowing);
     }
 
@@ -36,8 +66,9 @@ public class BorrowingServiceImpl implements BorrowingService {
     }
 
     @Override
-    public void deleteByIds(Long bookid, Long userid) {
-        borrowingRepository.deleteById(new BorrowingKey(userid, bookid));
+    public void deleteById(Long borrowingId) {
+//        borrowingRepository.deleteById(new BorrowingKey(userid, bookid));
+        borrowingRepository.deleteById(borrowingId);
     }
 
     @Override

@@ -6,5 +6,5 @@ import pl.weeia.library.model.entities.Borrowing;
 import pl.weeia.library.model.entities.BorrowingKey;
 
 @Repository
-public interface BorrowingRepository extends JpaRepository<Borrowing, BorrowingKey> {
+public interface BorrowingRepository extends JpaRepository<Borrowing, Long> {
 }

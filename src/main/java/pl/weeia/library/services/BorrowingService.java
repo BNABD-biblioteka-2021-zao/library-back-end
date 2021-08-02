@@ -11,7 +11,7 @@ public interface BorrowingService {
 
     Borrowing updateBorrowing(Borrowing borrowing);
 
-    void deleteByIds(Long bookid, Long userid);
+    void deleteById(Long borrowingId);
 
     List<Borrowing> findAllMyBorrowings(String name);
 }

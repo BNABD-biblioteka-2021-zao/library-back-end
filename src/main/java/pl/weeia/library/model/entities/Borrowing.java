@@ -1,8 +1,9 @@
 package pl.weeia.library.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
+import pl.weeia.library.model.enums.Status;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,22 +13,30 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class Borrowing {
 
-    @EmbeddedId
-    private BorrowingKey id;
+//    @EmbeddedId
+//    private BorrowingKey id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "borrowing_seq")
+    private Long id;
 
     @ManyToOne
-    @MapsId("userId")
+//    @MapsId("userId")
     @JoinColumn(name = "user_id")
-    @JsonIgnore
+//    @JsonIgnore
     private LibraryUser user;
 
     @ManyToOne
-    @MapsId("bookCopyId")
+//    @MapsId("bookCopyId")
     @JoinColumn(name = "book_copy_id")
-    @JsonIgnore
+//    @JsonIgnore
     private BookCopy bookCopy;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Nullable
     private LocalDateTime borrowStartTime;
+    @Nullable
     private LocalDateTime borrowEndTime;
 
     public Borrowing(LibraryUser user, BookCopy bookCopy, LocalDateTime borrowStartTime, LocalDateTime borrowEndTime) {
