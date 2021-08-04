@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -21,6 +22,7 @@ public class Book {
     private String title;
     private String genre;
     private String author;
+    @Size(min = 0, max = 4096)
     private String description;
     @OneToMany(mappedBy = "book")
     @JsonIgnore
