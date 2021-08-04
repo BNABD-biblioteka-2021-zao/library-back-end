@@ -2,6 +2,7 @@ package pl.weeia.library.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import pl.weeia.library.model.enums.CopyStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,8 +22,13 @@ public class BookCopy {
     private LocalDate publishDate;
     private Long pageAmount;
     private String publisher;
+
+    @Enumerated(EnumType.STRING)
+    private CopyStatus status;
+
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
+    @JsonIgnore
     private Book book;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

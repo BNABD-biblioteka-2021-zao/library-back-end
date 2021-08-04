@@ -35,6 +35,8 @@ public class Borrowing {
     private Status status;
 
     @Nullable
+    private LocalDateTime reservationTime;
+    @Nullable
     private LocalDateTime borrowStartTime;
     @Nullable
     private LocalDateTime borrowEndTime;

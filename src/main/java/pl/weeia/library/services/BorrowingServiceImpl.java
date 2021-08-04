@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 import pl.weeia.library.model.entities.BookCopy;
 import pl.weeia.library.model.entities.Borrowing;
 import pl.weeia.library.model.entities.LibraryUser;
+import pl.weeia.library.model.enums.CopyStatus;
 import pl.weeia.library.model.enums.Status;
 import pl.weeia.library.repositories.BookCopyRepository;
 import pl.weeia.library.repositories.BorrowingRepository;
@@ -42,9 +43,11 @@ public class BorrowingServiceImpl implements BorrowingService {
         System.out.println(user);
         System.out.println(copy);
         borrowing.setUser(user);
+        copy.setStatus(CopyStatus.unavailable);
         borrowing.setBookCopy(copy);
         if (hasUserRole) {
             borrowing.setStatus(Status.reservation);
+            borrowing.setReservationTime(LocalDateTime.now());
             borrowing.setBorrowStartTime(null);
             borrowing.setBorrowEndTime(null);
         }else {
