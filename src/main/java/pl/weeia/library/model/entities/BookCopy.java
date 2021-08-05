@@ -9,8 +9,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookCopy {

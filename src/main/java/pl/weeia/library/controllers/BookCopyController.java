@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.weeia.library.model.DTOs.BookCopyModel;
 import pl.weeia.library.model.entities.BookCopy;
 import pl.weeia.library.services.BookCopyService;
 
@@ -22,12 +23,12 @@ public class BookCopyController {
     }
 
     @PostMapping
-    public BookCopy insertNewBookCopy(@RequestBody BookCopy bookCopy) {
+    public BookCopy insertNewBookCopy(@RequestBody BookCopyModel bookCopy) {
         return copyService.insertBookCopy(bookCopy);
     }
 
     @PutMapping
-    public ResponseEntity<BookCopy> updateBook(@RequestBody BookCopy bookCopy) {
+    public ResponseEntity<BookCopy> updateBook(@RequestBody BookCopyModel bookCopy) {
         return new ResponseEntity<>(copyService.updateBook(bookCopy), HttpStatus.OK);
     }
 

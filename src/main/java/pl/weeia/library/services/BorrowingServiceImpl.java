@@ -62,6 +62,14 @@ public class BorrowingServiceImpl implements BorrowingService {
     @Override
     public Borrowing updateBorrowing(Borrowing borrowing) {
         if (borrowingRepository.existsById(borrowing.getId())) {
+            if (borrowing.getStatus().equals(Status.returned)){
+                BookCopy bc = copyRepository.findById(borrowing.getBookCopy().getId()).orElseThrow();
+                bc.setStatus(CopyStatus.available);
+                copyRepository.save(bc);
+                borrowing.setBookCopy(bc);
+            }
+            System.out.println(borrowing.getBookCopy().getStatus());
+            System.out.println(borrowing.getBookCopy());
             return borrowingRepository.save(borrowing);
         } else {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Borrowing with provided id doesn't exist");
