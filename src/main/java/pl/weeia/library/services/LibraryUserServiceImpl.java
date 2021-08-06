@@ -10,6 +10,7 @@ import pl.weeia.library.model.entities.LibraryUser;
 import pl.weeia.library.repositories.LibraryUserRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,6 +23,11 @@ public class LibraryUserServiceImpl implements LibraryUserService{
 
     public LibraryUser getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<LibraryUser> findAll() {
+        return userRepository.findAll();
     }
 
     @Override

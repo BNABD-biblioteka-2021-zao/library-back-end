@@ -3,7 +3,7 @@ package pl.weeia.library.services;
 import pl.weeia.library.model.DTOs.UserInsertModel;
 import pl.weeia.library.model.entities.LibraryUser;
 
-import java.util.UUID;
+import java.util.List;
 
 public interface LibraryUserService {
 
@@ -15,4 +15,6 @@ public interface LibraryUserService {
     String deleteMyAccount(String name);
 
     LibraryUser findByEmail(String name);
+
+    List<LibraryUser> findAll();
 }

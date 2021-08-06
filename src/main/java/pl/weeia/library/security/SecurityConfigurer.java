@@ -50,7 +50,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .antMatchers(API+"/test/user", API+"/book/all", API+"/borrowing")
                 .hasRole("USER")
-                .antMatchers(API+"/test/librarian", API+"/book/**", API+"/book/all", API+"/bookcopy/**", API+"/borrowing/**", API+"/borrowing")
+                .antMatchers(API+"/test/librarian", API+"/book/**", API+"/book/all", API+"/bookcopy/**", API+"/borrowing/**", API+"/borrowing", API+"/user/all")
                 .hasRole("LIBRARIAN")
                 .anyRequest()
                 .authenticated()

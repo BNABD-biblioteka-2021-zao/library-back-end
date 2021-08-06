@@ -11,6 +11,7 @@ import pl.weeia.library.model.entities.LibraryUser;
 import pl.weeia.library.services.LibraryUserServiceImpl;
 
 import java.security.Principal;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -23,6 +24,10 @@ public class UserController {
         return new ResponseEntity<LibraryUser>(userService.findByEmail(principal.getName()), HttpStatus.OK);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<LibraryUser>> getAllUsers() {
+        return new ResponseEntity<List<LibraryUser>>(userService.findAll(), HttpStatus.OK);
+    }
 
     @DeleteMapping
     public ResponseEntity<String> deleteMyAccount(Principal principal) {

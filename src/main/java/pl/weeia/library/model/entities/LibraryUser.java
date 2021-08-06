@@ -29,10 +29,6 @@ public class LibraryUser {
 
     private String role;
 
-    @CreationTimestamp
-    @Column(updatable = false, insertable = false)
-    private LocalDateTime registration;
-
     @JsonIgnore
     private String refreshToken;
 
