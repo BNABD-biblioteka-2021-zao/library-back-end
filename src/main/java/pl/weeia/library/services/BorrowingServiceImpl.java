@@ -15,6 +15,7 @@ import pl.weeia.library.repositories.BookCopyRepository;
 import pl.weeia.library.repositories.BorrowingRepository;
 import pl.weeia.library.repositories.LibraryUserRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -47,13 +48,13 @@ public class BorrowingServiceImpl implements BorrowingService {
         borrowing.setBookCopy(copy);
         if (hasUserRole) {
             borrowing.setStatus(Status.reservation);
-            borrowing.setReservationTime(LocalDateTime.now());
+            borrowing.setReservationTime(LocalDate.now());
             borrowing.setBorrowStartTime(null);
             borrowing.setBorrowEndTime(null);
         }else {
             borrowing.setStatus(Status.borrowed);
             if (borrowing.getBorrowStartTime() == null){
-                borrowing.setBorrowStartTime(LocalDateTime.now());
+                borrowing.setBorrowStartTime(LocalDate.now());
             }
         }
         return borrowingRepository.save(borrowing);

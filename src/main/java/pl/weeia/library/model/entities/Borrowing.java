@@ -6,6 +6,7 @@ import org.springframework.lang.Nullable;
 import pl.weeia.library.model.enums.Status;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,20 +36,20 @@ public class Borrowing {
     private Status status;
 
     @Nullable
-    private LocalDateTime reservationTime;
+    private LocalDate reservationTime;
     @Nullable
-    private LocalDateTime borrowStartTime;
+    private LocalDate borrowStartTime;
     @Nullable
-    private LocalDateTime borrowEndTime;
+    private LocalDate borrowEndTime;
 
-    public Borrowing(LibraryUser user, BookCopy bookCopy, LocalDateTime borrowStartTime, LocalDateTime borrowEndTime) {
+    public Borrowing(LibraryUser user, BookCopy bookCopy, LocalDate borrowStartTime, LocalDate borrowEndTime) {
         this.user = user;
         this.bookCopy = bookCopy;
         this.borrowStartTime = borrowStartTime;
         this.borrowEndTime = borrowEndTime;
     }
 
-    public Borrowing(LocalDateTime borrowStartTime, LocalDateTime borrowEndTime) {
+    public Borrowing(LocalDate borrowStartTime, LocalDate borrowEndTime) {
         this.borrowStartTime = borrowStartTime;
         this.borrowEndTime = borrowEndTime;
     }

@@ -13,4 +13,6 @@ public interface LibraryUserService {
     LibraryUser getUserByEmail(String name);
 
     String deleteMyAccount(String name);
+
+    LibraryUser findByEmail(String name);
 }

@@ -24,6 +24,11 @@ public class LibraryUserServiceImpl implements LibraryUserService{
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public LibraryUser findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     @Transactional
     public void saveRefreshToken(String email, String refreshToken) {
         System.out.println("saving token");

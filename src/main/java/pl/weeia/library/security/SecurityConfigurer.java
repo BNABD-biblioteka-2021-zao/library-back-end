@@ -46,7 +46,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(API+"/auth/login", API+"/test/hello",API+"/auth/register")
                 .permitAll()
-                .antMatchers(API+"/auth/refresh-token",API+"/test/nice")
+                .antMatchers(API+"/auth/refresh-token",API+"/test/nice", API+"/user")
                 .authenticated()
                 .antMatchers(API+"/test/user", API+"/book/all", API+"/borrowing")
                 .hasRole("USER")
