@@ -39,8 +39,14 @@ public class BorrowingServiceImpl implements BorrowingService {
         System.out.println(authentication.getAuthorities());
         boolean hasUserRole = authentication.getAuthorities().stream()
                 .anyMatch(r -> r.getAuthority().equals("ROLE_USER"));
-        BookCopy copy = copyRepository.findById(borrowing.getBookCopy().getId()).orElseThrow();
-        LibraryUser user = userRepository.findById(borrowing.getUser().getId()).orElseThrow();
+        BookCopy copy = copyRepository.findById(borrowing.getBookCopy().getId()).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.CONFLICT, "Book with provided id doesn't exist"));
+        if (copy.getStatus().equals(CopyStatus.unavailable)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Copy with provided id is unavailable");
+        }
+        LibraryUser user = userRepository.findById(borrowing.getUser().getId()).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.CONFLICT, "User with provided id doesn't exist"));
+
         System.out.println(user);
         System.out.println(copy);
         borrowing.setUser(user);
