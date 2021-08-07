@@ -46,11 +46,14 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(API+"/auth/login", API+"/test/hello",API+"/auth/register")
                 .permitAll()
-                .antMatchers(API+"/auth/refresh-token",API+"/test/nice", API+"/user", API+"/book/all", API+"/bookcopy/all", API+"/borrowing/allMy")
+                .antMatchers(API+"/auth/refresh-token",API+"/test/nice", API+"/user", API+"/book/all",
+                        API+"/bookcopy/all", API+"/borrowing/allMy", API+"/borrowing/add")
                 .authenticated()
                 .antMatchers(API+"/test/user", API+"/borrowing")
                 .hasRole("USER")
-                .antMatchers(API+"/test/librarian", API+"/book/**", API+"/bookcopy/**", API+"/borrowing/**", API+"/borrowing/all", API+"/user/all")
+                .antMatchers(API+"/test/librarian", API+"/book/**", API+"/bookcopy/**",
+                        API+"/borrowing/**", API+"/borrowing/all",API+"/borrowing/edit",
+                        API+"/user/all")
                 .hasRole("LIBRARIAN")
                 .anyRequest()
                 .authenticated()

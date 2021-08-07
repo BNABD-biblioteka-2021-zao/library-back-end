@@ -27,7 +27,7 @@ public class BorrowingController {
         return new ResponseEntity<>(borrowingService.findAllBorrowings(), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Borrowing> insertBorrowing(Principal principal, @RequestBody Borrowing borrowing) {
         System.out.println(borrowing);
         System.out.println(principal);
@@ -35,7 +35,7 @@ public class BorrowingController {
         return new ResponseEntity<>(borrowingService.insertBorrowing(borrowing), HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping("/edit")
     public ResponseEntity<Borrowing> updateBorrowing(@RequestBody Borrowing borrowing) {
         return new ResponseEntity<>(borrowingService.updateBorrowing(borrowing), HttpStatus.OK);
     }
