@@ -42,6 +42,15 @@ public class BookCopy {
         this.book = book;
     }
 
+    public BookCopy(String ISBN, LocalDate publishDate, Long pageAmount, String publisher, Book book, CopyStatus status) {
+        this.ISBN = ISBN;
+        this.publishDate = publishDate;
+        this.pageAmount = pageAmount;
+        this.publisher = publisher;
+        this.status = status;
+        this.book = book;
+    }
+
     public BookCopy(Long bookCopyId) {
         this.id = bookCopyId;
     }
@@ -49,4 +58,6 @@ public class BookCopy {
     public BookCopy(long i) {
         this.id = i;
     }
+
+
 }
