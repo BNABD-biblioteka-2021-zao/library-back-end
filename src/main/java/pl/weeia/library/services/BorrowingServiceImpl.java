@@ -91,6 +91,7 @@ public class BorrowingServiceImpl implements BorrowingService {
 
     @Override
     public List<Borrowing> findAllMyBorrowings(String name) {
-        return null;
+        LibraryUser user = userRepository.findByEmail(name);
+        return borrowingRepository.findAllByUser(user);
     }
 }

@@ -19,6 +19,7 @@ public class BorrowingController {
 
     @GetMapping("/allMy")
     public ResponseEntity<List<Borrowing>> findAllMyBorrowings(Principal principal) {
+        System.out.println(principal.getName());
         return new ResponseEntity<>(borrowingService.findAllMyBorrowings(principal.getName()), HttpStatus.OK);
     }
 
