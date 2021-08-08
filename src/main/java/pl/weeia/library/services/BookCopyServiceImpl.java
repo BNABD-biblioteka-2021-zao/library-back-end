@@ -41,9 +41,8 @@ public class BookCopyServiceImpl implements BookCopyService {
 
     @Override
     public BookCopy updateBook(CopyUpdateModel bookCopyModel) {
-        if (copyRepository.existsById(bookCopyModel.getId())) {
-//            Book book = bookRepository.findById(bookCopyModel.getBookId()).orElseThrow();
-            BookCopy bookCopy = new BookCopy();
+            BookCopy bookCopy = copyRepository.findById(bookCopyModel.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.CONFLICT, "Book copy with provided id doesn't exist"));
+//            Book book = bookRepository.findById(bookCopy.getBookId()).orElseThrow();
             bookCopy.setISBN(bookCopyModel.getISBN());
             bookCopy.setPageAmount(bookCopyModel.getPageAmount());
             bookCopy.setPublishDate(bookCopyModel.getPublishDate());
@@ -51,9 +50,6 @@ public class BookCopyServiceImpl implements BookCopyService {
 //            bookCopy.setBook(book);
             bookCopy.setStatus(CopyStatus.available);
             return copyRepository.save(bookCopy);
-        } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Book copy with provided id doesn't exist");
-        }
     }
 
     @Override

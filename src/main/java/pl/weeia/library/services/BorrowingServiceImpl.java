@@ -85,6 +85,10 @@ public class BorrowingServiceImpl implements BorrowingService {
 
     @Override
     public void deleteById(Long borrowingId) {
+        Borrowing borrowing = borrowingRepository.findById(borrowingId).orElseThrow();
+        BookCopy copy = borrowing.getBookCopy();
+        copy.setStatus(CopyStatus.available);
+        copyRepository.save(copy);
 //        borrowingRepository.deleteById(new BorrowingKey(userid, bookid));
         borrowingRepository.deleteById(borrowingId);
     }
