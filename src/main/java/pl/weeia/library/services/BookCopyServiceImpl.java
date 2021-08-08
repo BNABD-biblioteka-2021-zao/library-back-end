@@ -33,7 +33,8 @@ public class BookCopyServiceImpl implements BookCopyService {
                     c.getPublishDate(),
                     c.getPageAmount(),
                     c.getPublisher(),
-                    c.getBook().getId()
+                    c.getBook().getId(),
+                    c.getStatus()
             ));
         }
         return models;
