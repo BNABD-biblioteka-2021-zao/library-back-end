@@ -47,12 +47,12 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers(API+"/auth/login", API+"/test/hello",API+"/auth/register")
                 .permitAll()
                 .antMatchers(API+"/auth/refresh-token",API+"/test/nice", API+"/user", API+"/book/all",
-                        API+"/bookcopy/all", API+"/borrowing/allMy", API+"/borrowing/add")
+                        API+"/bookcopy/all", API+"/borrowing/allMy", API+"/borrowing/add", API+"/borrowing/**")
                 .authenticated()
-                .antMatchers(API+"/test/user", API+"/borrowing")
+                .antMatchers(API+"/test/user")
                 .hasRole("USER")
                 .antMatchers(API+"/test/librarian", API+"/book/**", API+"/bookcopy/**",
-                        API+"/borrowing/**", API+"/borrowing/all",API+"/borrowing/edit",
+                         API+"/borrowing/all",API+"/borrowing/edit",
                         API+"/user/all")
                 .hasRole("LIBRARIAN")
                 .anyRequest()
