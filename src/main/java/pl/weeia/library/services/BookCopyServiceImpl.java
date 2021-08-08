@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pl.weeia.library.model.DTOs.BookCopyModel;
+import pl.weeia.library.model.DTOs.CopyUpdateModel;
 import pl.weeia.library.model.entities.Book;
 import pl.weeia.library.model.entities.BookCopy;
 import pl.weeia.library.model.enums.CopyStatus;
@@ -39,15 +40,15 @@ public class BookCopyServiceImpl implements BookCopyService {
     }
 
     @Override
-    public BookCopy updateBook(BookCopyModel bookCopyModel) {
+    public BookCopy updateBook(CopyUpdateModel bookCopyModel) {
         if (copyRepository.existsById(bookCopyModel.getId())) {
-            Book book = bookRepository.findById(bookCopyModel.getBookId()).orElseThrow();
+//            Book book = bookRepository.findById(bookCopyModel.getBookId()).orElseThrow();
             BookCopy bookCopy = new BookCopy();
             bookCopy.setISBN(bookCopyModel.getISBN());
             bookCopy.setPageAmount(bookCopyModel.getPageAmount());
             bookCopy.setPublishDate(bookCopyModel.getPublishDate());
             bookCopy.setPublisher(bookCopyModel.getPublisher());
-            bookCopy.setBook(book);
+//            bookCopy.setBook(book);
             bookCopy.setStatus(CopyStatus.available);
             return copyRepository.save(bookCopy);
         } else {

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.weeia.library.model.DTOs.BookCopyModel;
+import pl.weeia.library.model.DTOs.CopyUpdateModel;
 import pl.weeia.library.model.entities.BookCopy;
 import pl.weeia.library.services.BookCopyService;
 
@@ -28,7 +29,7 @@ public class BookCopyController {
     }
 
     @PutMapping
-    public ResponseEntity<BookCopy> updateBook(@RequestBody BookCopyModel bookCopy) {
+    public ResponseEntity<BookCopy> updateBook(@RequestBody CopyUpdateModel bookCopy) {
         return new ResponseEntity<>(copyService.updateBook(bookCopy), HttpStatus.OK);
     }
 
