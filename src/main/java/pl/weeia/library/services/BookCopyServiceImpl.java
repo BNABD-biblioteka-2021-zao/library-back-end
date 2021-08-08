@@ -12,6 +12,7 @@ import pl.weeia.library.model.enums.CopyStatus;
 import pl.weeia.library.repositories.BookCopyRepository;
 import pl.weeia.library.repositories.BookRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,8 +23,20 @@ public class BookCopyServiceImpl implements BookCopyService {
     private final BookRepository bookRepository;
 
     @Override
-    public List<BookCopy> findAll() {
-        return copyRepository.findAll();
+    public List<BookCopyModel> findAll() {
+        List<BookCopy> copies = copyRepository.findAll();
+        List<BookCopyModel> models = new ArrayList<>();
+        for (BookCopy c : copies) {
+            models.add(new BookCopyModel(
+                    c.getId(),
+                    c.getISBN(),
+                    c.getPublishDate(),
+                    c.getPageAmount(),
+                    c.getPublisher(),
+                    c.getBook().getId()
+            ));
+        }
+        return models;
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.List;
 public interface BookCopyService {
     BookCopy insertBookCopy(BookCopyModel bookCopy);
 
-    List<BookCopy> findAll();
+    List<BookCopyModel> findAll();
 
     BookCopy updateBook(CopyUpdateModel bookCopy);
 

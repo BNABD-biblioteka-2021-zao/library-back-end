@@ -19,7 +19,7 @@ public class BookCopyController {
     private final BookCopyService copyService;
 
     @GetMapping("/all")
-    public List<BookCopy> getAll(){
+    public List<BookCopyModel> getAll(){
         return copyService.findAll();
     }
 
