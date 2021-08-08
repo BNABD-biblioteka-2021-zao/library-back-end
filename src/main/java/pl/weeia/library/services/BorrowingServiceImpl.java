@@ -68,6 +68,14 @@ public class BorrowingServiceImpl implements BorrowingService {
 
     @Override
     public Borrowing updateBorrowing(Borrowing borrowing) {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean hasUserRole = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLE_USER"));
+        if (hasUserRole && borrowing.getStatus() != Status.reservation) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "You can't change status for other case than reservation");
+        }
+
         if (borrowingRepository.existsById(borrowing.getId())) {
             if (borrowing.getStatus().equals(Status.returned)){
                 BookCopy bc = copyRepository.findById(borrowing.getBookCopy().getId()).orElseThrow();
