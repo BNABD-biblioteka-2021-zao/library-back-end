@@ -27,7 +27,7 @@ public class BookCopy {
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Book book;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

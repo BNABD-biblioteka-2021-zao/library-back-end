@@ -23,8 +23,8 @@ public class Book {
     @Size(min = 0, max = 4096)
     private String description;
 
-    @OneToMany(mappedBy = "book")
-    private Set<BookCopy> copies;
+//    @OneToMany(mappedBy = "book")
+//    private Set<BookCopy> copies;
 
     public Book(String title, String genre, String author, String description) {
         this.title = title;

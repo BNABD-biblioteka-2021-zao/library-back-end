@@ -23,21 +23,21 @@ public class BookCopyServiceImpl implements BookCopyService {
     private final BookRepository bookRepository;
 
     @Override
-    public List<BookCopyModel> findAll() {
+    public List<BookCopy> findAll() {
         List<BookCopy> copies = copyRepository.findAll();
-        List<BookCopyModel> models = new ArrayList<>();
-        for (BookCopy c : copies) {
-            models.add(new BookCopyModel(
-                    c.getId(),
-                    c.getISBN(),
-                    c.getPublishDate(),
-                    c.getPageAmount(),
-                    c.getPublisher(),
-                    c.getBook().getId(),
-                    c.getStatus()
-            ));
-        }
-        return models;
+//        List<BookCopyModel> models = new ArrayList<>();
+//        for (BookCopy c : copies) {
+//            models.add(new BookCopyModel(
+//                    c.getId(),
+//                    c.getISBN(),
+//                    c.getPublishDate(),
+//                    c.getPageAmount(),
+//                    c.getPublisher(),
+//                    c.getBook().getId(),
+//                    c.getStatus()
+//            ));
+//        }
+        return copies;
     }
 
     @Override
